@@ -7,7 +7,7 @@
 	The end goal is to produce a zip of a website you could deploy for your application.  This build is not intended to be an example
 	for how to use Ant or the Flex SD Ant tasks.  This is just one possible way to utilize the FlexUnit4 Ant task. 
  -->
-<project name="TestFramework" basedir="." default="package">
+<project name="PlaybookSandbox" basedir="." default="package">
 	<!-- setup a prefix for all environment variables -->
 	<property environment="env" />
 	
@@ -16,7 +16,7 @@
 	<property name="FLEX_HOME" value="/Applications/Adobe Flash Builder 4.5/sdks/4.5.0" />
 	<property name="TABLET_SDK" value="/Library/RIM/blackberry-tablet-sdk-1.1.0/frameworks" />
 	<property name="APP_NAME" value="PlaybookSandbox" />
-	<property name="ant.project.name" value="PlaybookSandbox" />
+	<!-- property name="ant.project.name" value="PlaybookSandbox" / -->
 
 	<property name="main.src.loc" location="${basedir}/src/" />
 	<property name="test.src.loc" location="${basedir}/tests/" />
@@ -134,7 +134,7 @@
 		</zip>
 	</target>
 	
-	<target name="deploy to server">
+	<target name="deploy">
 		<scp file="${output.loc}/${ant.project.name}.zip" todir="xtreme:${env.ANT_SCP_PASSWORD}@assets.xtremelabs.com:/home/xtreme/mobile_assets/playbook_framework" verbose="true" trust="yes" />
 	</target>
 </project>
