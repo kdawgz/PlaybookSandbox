@@ -16,6 +16,7 @@
 	<property name="FLEX_HOME" value="/Applications/Adobe Flash Builder 4.5/sdks/4.5.0" />
 	<property name="TABLET_SDK" value="/Library/RIM/blackberry-tablet-sdk-1.1.0/frameworks" />
 	<property name="APP_NAME" value="PlaybookSandbox" />
+	<property name="ant.project.name" value="PlaybookSandbox" />
 
 	<property name="main.src.loc" location="${basedir}/src/" />
 	<property name="test.src.loc" location="${basedir}/tests/" />
@@ -29,7 +30,8 @@
 
 	<!-- Setup Flex and FlexUnit ant tasks -->
 	<!-- You can set this directly so mxmlc will work correctly, or set FLEX_HOME as an environment variable and use as below -->
-	<property name="FLEX_HOME" location="${env.FLEX_HOME}" />
+	<!-- property name="FLEX_HOME" location="${env.FLEX_HOME}" /-->
+	
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
 	<taskdef resource="flexUnitTasks.tasks">
 	   <classpath>
@@ -38,7 +40,15 @@
 	      </fileset>
 	   </classpath>
 	</taskdef>
-
+	
+	 <!-- Add JSCH jar to the classpath-->
+	  <classloader>
+	    <classpath>
+	      <fileset dir="${lib.loc}" includes="jsch*.jar"/>
+	      </classpath>
+	  </classloader>
+	
+	
 	<target name="clean">
 		<!-- Remove all directories created during the build process -->
 		<delete dir="${output.loc}" />
@@ -110,6 +120,7 @@
 			</fileset>
 			<report format="frames" todir="${report.loc}/html" />
 		</junitreport>
+		<fail message="Test failed!!!" if="test.failure" />
 	</target>
 	
 	<target name="package" depends="test">
@@ -121,5 +132,9 @@
 		<zip destfile="${output.loc}/${ant.project.name}.zip">
 			<fileset dir="${dist.loc}" />
 		</zip>
+	</target>
+	
+	<target name="deploy to server">
+		<scp file="${output.loc}/${ant.project.name}.zip" todir="xtreme:${env.ANT_SCP_PASSWORD}@assets.xtremelabs.com:/home/xtreme/mobile_assets/playbook_framework" verbose="true" trust="yes" />
 	</target>
 </project>
