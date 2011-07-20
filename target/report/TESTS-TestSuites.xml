@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+  <testsuite errors="0" failures="0" hostname="xtremelabs2-PC-2.local" id="0" name="UtilsTest" package="com.PlaybookSandbox.app.util" skipped="0" tests="1" time="0.027" timestamp="2011-07-20T01:39:09">
+      <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testTwoNumbers" time="0.027" />
+
+  </testsuite>
+</testsuites>
