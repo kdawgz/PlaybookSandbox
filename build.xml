@@ -82,7 +82,8 @@
 		    toDir="${report.loc}" 
 			haltonfailure="false" 
 			verbose="true" 
-			localTrusted="true">
+			localTrusted="true"
+			failureproperty="flexunit.failed">
 	      <source dir="${main.src.loc}" />
 	      <testSource dir="${test.src.loc}">
 	         <include name="**/*Test.as" />

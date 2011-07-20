@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<testsuite name="com.PlaybookSandbox.app.util.UtilsTest" tests="5" failures="1" errors="1" skipped="1" time="0.031" hostname="xtremelabs2-PC-2.local" timestamp="2011-07-20T02:24:54">
+<testsuite name="com.PlaybookSandbox.app.util.UtilsTest" tests="5" failures="1" errors="1" skipped="1" time="0.032" hostname="xtremelabs2-PC-2.local" timestamp="2011-07-20T02:42:39">
   <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="divisionWithException" time="0.026"/>
-  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testTwoNumbers" time="0.001"/>
+  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testTwoNumbers" time="0.002"/>
   <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testSampleIgnore" time="0.002">
     <skipped/>
   </testcase>
-  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testSampleFailure" time="0.001">
+  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testSampleFailure" time="0.002">
     <failure message="FAIL! - This is a sample test that will fail." type="com.PlaybookSandbox.app.util::UtilsTest.testSampleFailure"><![CDATA[FAIL! - This is a sample test that will fail.
 	at org.flexunit::Assert$/fail()
 	at com.PlaybookSandbox.app.util::UtilsTest/testSampleFailure()
@@ -73,7 +73,7 @@
 	at org.flexunit.internals.runners.statements::InvokeMethod/evaluate()
 	at org.flexunit.internals.runners.statements::SequencerWithDecoration/executeStep()]]></failure>
   </testcase>
-  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testSampleError" time="0.001">
+  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testSampleError" time="0.000">
     <error message="ERROR! - This is an error" type="com.PlaybookSandbox.app.util::UtilsTest.testSampleError"><![CDATA[Error: ERROR! - This is an error
 	at com.PlaybookSandbox.app.util::UtilsTest/testSampleError()
 	at Function/http://adobe.com/AS3/2006/builtin::apply()
