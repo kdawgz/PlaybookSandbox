@@ -25,9 +25,9 @@
 	<property name="tabletsdk.loc" location="${TABLET_SDK}/libs" />
 	<property name="airsdk.loc" location="${FLEX_HOME}/frameworks/libs/air" />
 	<property name="output.loc" location="${basedir}/target" />
-	<property name="bin.loc" location="${output.loc}/bin" />
+	<property name="testrunner.loc" location="${output.loc}/testrunner" />
 	<property name="report.loc" location="${output.loc}/report" />
-	<property name="dist.loc" location="${output.loc}/dist" />
+	<property name="deploy.loc" location="${output.loc}/deploy" />
 
 	<!-- Setup Flex and FlexUnit ant tasks -->
 	<!-- You can set this directly so mxmlc will work correctly, or set FLEX_HOME as an environment variable and use as below -->
@@ -58,14 +58,14 @@
 	<target name="init">
 		<!-- Create directories needed for the build process -->
 		<mkdir dir="${output.loc}" />
-		<mkdir dir="${bin.loc}" />
+		<mkdir dir="${testrunner.loc}" />
 		<mkdir dir="${report.loc}" />
-		<mkdir dir="${dist.loc}" />
+		<mkdir dir="${deploy.loc}" />
 	</target>
 
 	<target name="compile" depends="init">
 		<!-- Compile Main.mxml as a SWF -->
-		<mxmlc file="${main.src.loc}/${APP_NAME}.as" output="${bin.loc}/${APP_NAME}.swf" static-link-runtime-shared-libraries="true">
+		<mxmlc file="${main.src.loc}/${APP_NAME}.as" output="${testrunner.loc}/${APP_NAME}.swf" static-link-runtime-shared-libraries="true">
 			<library-path dir="${lib.loc}" append="true">
 				<include name="*.swc" />
 			</library-path>
@@ -89,7 +89,7 @@
 	<target name="test" depends="compile">
 		<!-- Execute FlexUnit tests and publish reports -->
 		<flexunit 
-		    workingDir="${bin.loc}"
+		    workingDir="${testrunner.loc}"
 		    toDir="${report.loc}" 
 			haltonfailure="false" 
 			verbose="true" 
@@ -121,17 +121,17 @@
 			</fileset>
 			<report format="frames" todir="${report.loc}/html" />
 		</junitreport>
-		<fail message="Test failed!!!" if="test.failure" />
+		<fail message="Tests failed!" if="flexunit.failed" />
 	</target>
 	
 	<target name="package" depends="test">
 		<!-- Assemble final website -->
-		<copy file="${bin.loc}/${APP_NAME}.swf" todir="${dist.loc}" />
-		<html-wrapper swf="${APP_NAME}" output="${dist.loc}" height="100%" width="100%" />
+		<copy file="${testrunner.loc}/${APP_NAME}.swf" todir="${deploy.loc}" />
+		<html-wrapper swf="${APP_NAME}" output="${deploy.loc}" height="100%" width="100%" />
 
 		<!-- Zip up final website -->
 		<zip destfile="${output.loc}/${ant.project.name}.zip">
-			<fileset dir="${dist.loc}" />
+			<fileset dir="${deploy.loc}" />
 		</zip>
 	</target>
 	
