@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<testsuite name="com.PlaybookSandbox.app.util.UtilsTest" tests="5" failures="0" errors="0" skipped="1" time="0.028" hostname="xtremelabs2-PC-2.local" timestamp="2011-07-21T03:46:01">
-  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testSampleFailure" time="0.024"/>
-  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="divisionWithException" time="0.002"/>
-  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testTwoNumbers" time="0.000"/>
-  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testSampleError" time="0.001"/>
-  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testSampleIgnore" time="0.001">
+<testsuite name="com.PlaybookSandbox.app.util.UtilsTest" tests="5" failures="0" errors="0" skipped="1" time="0.029" hostname="xtremelabs2-PC-2.local" timestamp="2011-07-21T04:23:51">
+  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="divisionWithException" time="0.025"/>
+  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testTwoNumbers" time="0.001"/>
+  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testSampleIgnore" time="0.002">
     <skipped/>
   </testcase>
+  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testSampleFailure" time="0.001"/>
+  <testcase classname="com.PlaybookSandbox.app.util::UtilsTest" name="testSampleError" time="0.000"/>
 </testsuite>

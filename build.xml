@@ -144,7 +144,24 @@
 	
 	<target name="deploy">
 		<set.timestamp/>
-		<echo message="http://assets.xtremelabs.com/${APP_NAME}/${current.time}/${APP_NAME}.bar"/>
-		<scp file="${deploy.loc}/${ant.project.name}.bar" todir="xtreme:${env.ANT_SCP_PASSWORD}@assets.xtremelabs.com:/home/xtreme/mobile_assets/playbook_framework/${current.time}" verbose="true" trust="yes" />
+		<echo message="http://assets.xtremelabs.com/${APP_NAME}/${current.time}"/>
+		<sshexec host="assets.xtremelabs.com" 
+			username="xtreme" 
+			passphrase="${env.ANT_SCP_PASSWORD}" 
+			trust="true" 
+		    keyfile="/Users/KennethYip/.ssh/id_rsa" 
+			failonerror="false" 
+		    command="mkdir -p /home/xtreme/mobile_assets/${APP_NAME}/${current.time}"/>
+		<scp file="${deploy.loc}/${ant.project.name}.bar" 
+			todir="xtreme:${env.ANT_SCP_PASSWORD}@assets.xtremelabs.com:/home/xtreme/mobile_assets/${APP_NAME}/${current.time}/" 
+			verbose="true" 
+			trust="yes"/>
+		<sshexec host="assets.xtremelabs.com" 
+			username="xtreme" 
+			passphrase="${env.ANT_SCP_PASSWORD}" 
+			trust="true" 
+			keyfile="/Users/KennethYip/.ssh/id_rsa" 
+			failonerror="false" 
+			command="cd /home/xtreme/mobile_assets/${APP_NAME}/; chmod -R 775 ${current.time}/${APP_NAME}.bar"/>
 	</target>
 </project>
