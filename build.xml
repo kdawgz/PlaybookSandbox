@@ -17,6 +17,9 @@
 	<property name="FLEX_HOME" value="${build.flexHome}" />
 	<property name="TABLET_SDK" value="${build.tabletSDK}" />
 	<property name="APP_NAME" value="${ant.project.name}" />
+	<property name="ICON_NAME" value="${build.iconFile}" />
+	<property name="SPLASHSCREEN_NAME" value="${build.splashSceenFile}" />
+
 	<property name="main.src.loc" location="${basedir}/src/" />
 	<property name="test.src.loc" location="${basedir}/tests/" />
 	<property name="lib.loc" location="${basedir}/libs" />
@@ -140,8 +143,8 @@
 		<copy file="${testrunner.loc}/${APP_NAME}.swf" todir="${basedir}" />
 		<copy file="${main.src.loc}/${APP_NAME}-app.xml" todir="${basedir}" />
 		<copy file="${main.src.loc}/blackberry-tablet.xml" todir="${basedir}" />
-		<copy file="${main.src.loc}/blackberry-tablet-icon.png" todir="${basedir}" />
-		<copy file="${main.src.loc}/winter-wonderland-1024x600.jpg" todir="${basedir}" />
+		<copy file="${main.src.loc}/${ICON_NAME}" todir="${basedir}" />
+		<copy file="${main.src.loc}/${SPLASHSCREEN_NAME}" todir="${basedir}" />
 		
 		<!-- Create bar file in ${deploy.loc} -->
 		<exec executable="${tabletsdkbin.loc}/blackberry-airpackager">
@@ -150,8 +153,8 @@
 		    <arg value="${basedir}/${APP_NAME}-app.xml"/>
 			<arg value="${basedir}/blackberry-tablet.xml"/>
 		    <arg value="${basedir}/${APP_NAME}.swf"/>
-			<arg value="${basedir}/blackberry-tablet-icon.png"/>
-			<arg value="${basedir}/winter-wonderland-1024x600.jpg"/>
+			<arg value="${basedir}/${ICON_NAME}"/>
+			<arg value="${basedir}/${SPLASHSCREEN_NAME}"/>
 		</exec>
 		
 		<!-- Sign bar file with server -->
@@ -182,8 +185,8 @@
 		<delete file="${basedir}/${APP_NAME}.swf" />
 		<delete file="${basedir}/${APP_NAME}-app.xml" />
 		<delete file="${basedir}/blackberry-tablet.xml" />
-		<delete file="${basedir}/blackberry-tablet-icon.png" />
-		<delete file="${basedir}/winter-wonderland-1024x600.jpg" />
+		<delete file="${basedir}/${ICON_NAME}" />
+		<delete file="${basedir}/${SPLASHSCREEN_NAME}" />
 		<delete dir="${testrunner.loc}" />
 	</target>
 	
