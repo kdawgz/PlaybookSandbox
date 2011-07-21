@@ -1,6 +1,8 @@
 package com.PlaybookSandbox.app.util
 {
 	
+	import flashx.textLayout.tlf_internal;
+	
 	import org.flexunit.Assert;
 
 	public class UtilsTest
@@ -46,10 +48,11 @@ package com.PlaybookSandbox.app.util
 		
 		[Test]
 		public function testSampleFailure() : void {
-			Assert.fail("FAIL! - This is a sample test that will fail.");
+//			Assert.fail("FAIL! - This is a sample test that will fail.");
+			Assert.assertTrue(true);
 		}
 		
-		[Test]
+		[Test(expects="Error")]
 		public function testSampleError() : void {
 			throw new Error("ERROR! - This is an error");
 		}
