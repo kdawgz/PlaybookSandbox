@@ -136,6 +136,6 @@
 	</target>
 	
 	<target name="deploy">
-		<scp file="${output.loc}/${ant.project.name}.bar" todir="xtreme:${env.ANT_SCP_PASSWORD}@assets.xtremelabs.com:/home/xtreme/mobile_assets/playbook_framework" verbose="true" trust="yes" />
+		<scp file="${deploy.loc}/${ant.project.name}.bar" todir="xtreme:${env.ANT_SCP_PASSWORD}@assets.xtremelabs.com:/home/xtreme/mobile_assets/playbook_framework" verbose="true" trust="yes" />
 	</target>
 </project>
