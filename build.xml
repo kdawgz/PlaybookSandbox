@@ -14,7 +14,7 @@
 	<property file="${basedir}/build.properties"/>
 	<!-- /Applications/Adobe Flash Builder 4.5/sdks/4.5.0 -->
 	<!-- Setup paths for build -->
-	<property name="FLEX_HOME" value="${build.flexHome}" />
+	<property name="AIR_SDK" value="${build.airSDK}" />
 	<property name="TABLET_SDK" value="${build.tabletSDK}" />
 	<property name="APP_NAME" value="${ant.project.name}" />
 	<property name="ICON_NAME" value="${build.iconFile}" />
@@ -28,7 +28,7 @@
 	<property name="tabletsdklibs.loc" location="${TABLET_SDK}/frameworks/libs" />
 	<property name="tabletsdkbin.loc" location="${TABLET_SDK}/bin" />
 	<!-- AIRSDK paths for build -->
-	<property name="airsdk.loc" location="${FLEX_HOME}/frameworks/libs/air" />
+	<property name="airsdk.loc" location="${AIR_SDK}/frameworks/libs/air" />
 	<!-- Test and deploy output directories for build process -->
 	<property name="output.loc" location="${basedir}/target" />
 	<property name="testrunner.loc" location="${output.loc}/testrunner" />
@@ -36,10 +36,10 @@
 	<property name="deploy.loc" location="${output.loc}/deploy" />
 
 	<!-- Setup Flex and FlexUnit ant tasks -->
-	<!-- You can set this directly so mxmlc will work correctly, or set FLEX_HOME as an environment variable and use as below -->
-	<!-- property name="FLEX_HOME" location="${env.FLEX_HOME}" /-->
+	<!-- You can set this directly so mxmlc will work correctly, or set AIR_SDK as an environment variable and use as below -->
+	<!-- property name="AIR_SDK" location="${env.AIR_SDK}" /-->
 	
-	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+	<taskdef resource="flexTasks.tasks" classpath="${AIR_SDK}/ant/lib/flexTasks.jar" />
 	<taskdef resource="flexUnitTasks.tasks">
 	   <classpath>
 	      <fileset dir="${lib.loc}">
