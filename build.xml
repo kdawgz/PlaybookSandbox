@@ -144,7 +144,6 @@
 	
 	<target name="deploy">
 		<set.timestamp/>
-		<echo message="http://assets.xtremelabs.com/${APP_NAME}/${current.time}"/>
 		<sshexec host="assets.xtremelabs.com" 
 			username="xtreme" 
 			passphrase="${env.ANT_SCP_PASSWORD}" 
@@ -163,5 +162,6 @@
 			keyfile="/Users/KennethYip/.ssh/id_rsa" 
 			failonerror="false" 
 			command="cd /home/xtreme/mobile_assets/${APP_NAME}/; chmod -R 775 ${current.time}/${APP_NAME}.bar"/>
+		<echo message="http://assets.xtremelabs.com/${APP_NAME}/${current.time}/${APP_NAME}.bar"/>
 	</target>
 </project>
