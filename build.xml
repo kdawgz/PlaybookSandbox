@@ -10,7 +10,8 @@
 <project name="PlaybookSandbox" basedir="." default="package">
 	<!-- setup a prefix for all environment variables -->
 	<property environment="env" />
-	
+	<!-- Version info -->
+	<property file="${basedir}/version.properties"/>
 	<!-- /Applications/Adobe Flash Builder 4.5/sdks/4.5.0 -->
 	<!-- Setup paths for build -->
 	<property name="FLEX_HOME" value="/Applications/Adobe Flash Builder 4.5/sdks/4.5.0" />
