@@ -1,5 +1,5 @@
 <!-- 
-	This is intended to be a simple build file, created a suggestion for the necessary steps need to utilize the FlexUnit4 Ant task.
+	This is intended to be a build file that would automate the test and build process.
 	For the most detail when running this build, call "ant -v clean package".  The build uses a simple lifecycle of: 
 	
 	init->compile->test->package
@@ -7,7 +7,7 @@
 	The end goal is to produce a zip of a website you could deploy for your application.  This build is not intended to be an example
 	for how to use Ant or the Flex SD Ant tasks.  This is just one possible way to utilize the FlexUnit4 Ant task. 
  -->
-<project name="PlaybookSandbox" basedir="." default="package">
+<project name="PlaybookSandbox" basedir="." default="test">
 	<!-- setup a prefix for all environment variables -->
 	<property environment="env" />
 	<!-- Properties info (Must Fill Out Correctly) -->
@@ -137,7 +137,7 @@
 		<fail message="Tests failed!" if="flexunit.failed" />
 	</target>
 	
-	<target name="package" depends="test">
+	<target name="package">
 		<!-- Assemble for bar file, files must be packaged from root -->
 		<echo message="coping files to:${basedir} from:${main.src.loc}"/>
 		<copy file="${testrunner.loc}/${APP_NAME}.swf" todir="${basedir}" />
@@ -190,7 +190,7 @@
 		<delete dir="${testrunner.loc}" />
 	</target>
 	
-	<target name="deploy">
+	<target name="deploy" depends="package">
 		<!-- Create time-stampped directory on server-->
 		<set.timestamp/>
 		<sshexec host="assets.xtremelabs.com" 
