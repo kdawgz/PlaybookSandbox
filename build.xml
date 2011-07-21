@@ -133,6 +133,7 @@
 	
 	<target name="package" depends="test">
 		<!-- Assemble final bar file -->
+		<echo message="coping files to:${basedir} from:${main.src.loc}"/>
 		<copy file="${testrunner.loc}/${APP_NAME}.swf" todir="${basedir}" />
 		<delete dir="${testrunner.loc}" />
 		<copy file="${main.src.loc}/${APP_NAME}-app.xml" todir="${basedir}" />
@@ -140,6 +141,7 @@
 		<copy file="${main.src.loc}/blackberry-tablet-icon.png" todir="${basedir}" />
 		<copy file="${main.src.loc}/winter-wonderland-1024x600.jpg" todir="${basedir}" />
 
+		<echo message="deploy.loc is:${deploy.loc} and basedir is:${basedir} and main.src.loc is:${main.src.loc}"/>
 		<!-- create bar file and sign-->
 		<exec executable="/Applications/Adobe Flash Builder 4.5/sdks/blackberry-tablet-sdk-1.1.0/bin/blackberry-airpackager">
 		    <arg value="-package"/>
@@ -150,7 +152,8 @@
 			<arg value="${basedir}/blackberry-tablet-icon.png"/>
 			<arg value="${basedir}/winter-wonderland-1024x600.jpg"/>
 		</exec>
-		
+		<echo message="deploy.loc is:${deploy.loc} and basedir is:${basedir} and main.src.loc is:${main.src.loc}"/>
+
 		<exec executable="/Applications/Adobe Flash Builder 4.5/sdks/blackberry-tablet-sdk-1.1.0/bin/blackberry-signer">
 			<arg value="-verbose"/>
 			<arg value="-cskpass"/>
