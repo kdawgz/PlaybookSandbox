@@ -2,15 +2,12 @@
 
 
 <qnx>
-   <initialWindow>
-      <systemChrome>none</systemChrome>
-      <transparent>false</transparent>
-   </initialWindow>
    <icon>
    	<image>blackberry-tablet-icon.png</image>
    </icon>
    <splashscreen>winter-wonderland-1024x600.jpg</splashscreen>
-	
+   <publisher>Xtreme Labs Inc.</publisher>
+   <category>core.media</category>
    <!--  Name of author which is used for signing. 
          Must match the developer name of your development certificate -->
    <!-- <author>Sample Inc.</author> -->

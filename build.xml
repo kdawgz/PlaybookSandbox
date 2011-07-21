@@ -132,14 +132,52 @@
 	</target>
 	
 	<target name="package" depends="test">
-		<!-- Assemble final website -->
-		<copy file="${testrunner.loc}/${APP_NAME}.swf" todir="${deploy.loc}" />
-		<html-wrapper swf="${APP_NAME}" output="${deploy.loc}" height="100%" width="100%" />
+		<!-- Assemble final bar file -->
+		<copy file="${testrunner.loc}/${APP_NAME}.swf" todir="${basedir}" />
+		<delete dir="${testrunner.loc}" />
+		<copy file="${main.src.loc}/${APP_NAME}-app.xml" todir="${basedir}" />
+		<copy file="${main.src.loc}/blackberry-tablet.xml" todir="${basedir}" />
+		<copy file="${main.src.loc}/blackberry-tablet-icon.png" todir="${basedir}" />
+		<copy file="${main.src.loc}/winter-wonderland-1024x600.jpg" todir="${basedir}" />
 
-		<!-- Zip up final website -->
-		<zip destfile="${output.loc}/${ant.project.name}.zip">
-			<fileset dir="${deploy.loc}" />
-		</zip>
+		<!-- create bar file and sign-->
+		<exec executable="/Applications/Adobe Flash Builder 4.5/sdks/blackberry-tablet-sdk-1.1.0/bin/blackberry-airpackager">
+		    <arg value="-package"/>
+		    <arg value="${deploy.loc}/${APP_NAME}.bar"/>
+		    <arg value="${basedir}/${APP_NAME}-app.xml"/>
+			<arg value="${basedir}/blackberry-tablet.xml"/>
+		    <arg value="${basedir}/${APP_NAME}.swf"/>
+			<arg value="${basedir}/blackberry-tablet-icon.png"/>
+			<arg value="${basedir}/winter-wonderland-1024x600.jpg"/>
+		</exec>
+		
+		<exec executable="/Applications/Adobe Flash Builder 4.5/sdks/blackberry-tablet-sdk-1.1.0/bin/blackberry-signer">
+			<arg value="-verbose"/>
+			<arg value="-cskpass"/>
+			<arg value="suit6shred"/>
+			<arg value="-keystore"/>
+			<arg value="/Applications/Adobe Flash Builder 4.5/sdks/DeveloperCertificate.p12"/>
+			<arg value="-storepass"/>
+			<arg value="suit6shred"/>
+			<arg value="${basedir}/${APP_NAME}.bar"/>
+			<arg value="RDK"/>
+		</exec>
+
+		<exec executable="/Applications/Adobe Flash Builder 4.5/sdks/blackberry-tablet-sdk-1.1.0/bin/blackberry-signer">
+			<arg value="-verbose"/>
+			<arg value="-keystore"/>
+			<arg value="/Applications/Adobe Flash Builder 4.5/sdks/DeveloperCertificate.p12"/>
+			<arg value="-storepass"/>
+			<arg value="suit6shred"/>
+			<arg value="${basedir}/${APP_NAME}.bar"/>
+			<arg value="author"/>
+		</exec>
+		
+		<delete file="${basedir}/${APP_NAME}.swf" />
+		<delete file="${basedir}/${APP_NAME}-app.xml" />
+		<delete file="${basedir}/blackberry-tablet.xml" />
+		<delete file="${basedir}/blackberry-tablet-icon.png" />
+		<delete file="${basedir}/winter-wonderland-1024x600.jpg" />
 	</target>
 	
 	<target name="deploy">

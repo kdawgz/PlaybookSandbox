@@ -1,0 +1,46 @@
+Archive-Manifest-Version: 1.2
+Archive-Created-By: BlackBerry Tablet OS AIR BAR Packager 1.1.0
+
+Package-Type: application
+Package-Author: Xtreme Labs Inc.
+Package-Name: PlaybookSandbox
+Package-Version: 0.0.15.0
+Package-Architecture: armle-v7
+Package-Author-Certificate-Hash: kx5IpTVG4Udp1AIjDAiL2wSCf4xkbTLbcFXfTezUq79u9kqojz59jIrwtoMGwck1BLkkoVcS4HIBGCpnIvNBLw
+Package-Author-Id: gYAAgIiQvqHUjpaOCgSiN6bi05k
+Package-Id: gYABgK-_n_abW9J5XGu2NwNoa-s
+Package-Version-Id: gYACgESLt9gNLkXYAdbQSG6mHPs
+Package-Issue-Date: 2011-07-21T06:36:43Z
+
+Application-Name: PlaybookSandbox
+Application-Description: PlaybookSandbox
+Application-Version: 0.0.15.0
+Application-Requires-System: Tablet OS/1.0.6.0
+Application-Development-Mode: false
+Application-Id: gYADgK-_n_abW9J5XGu2NwNoa-s
+Application-Version-Id: gYAEgESLt9gNLkXYAdbQSG6mHPs
+
+Entry-Point-Name: PlaybookSandbox
+Entry-Point: app/air/PlaybookSandbox-app.xml
+Entry-Point-Type: Qnx/Air
+Entry-Point-Icon: air/blackberry-tablet-default-icon.png
+Entry-Point-Orientation: auto
+
+Archive-Asset-Name: air/PlaybookSandbox-app.xml
+Archive-Asset-SHA-512-Digest: yFecZUzuwRvOWKcfDJzDu9i5LyOF7Mo768bfxqCCz9aiZ-H9xOCQNbW6sXX1Nv0JK3F73MPAYEXrmOTkbAqSLg
+
+Archive-Asset-Name: air/blackberry-tablet-default-icon.png
+Archive-Asset-SHA-512-Digest: cDyyTf-3OIUlDa4QJas8D21pZ7sMV6suHDZNJoQzquGgsYrIItk0LIbcvzOIOgeuAl4CDONzM-NJ9POH_piHDw
+
+Archive-Asset-Name: air/src/blackberry-tablet-icon.png
+Archive-Asset-SHA-512-Digest: nZlJHuCwD-WGtCZwn1L_GAp4oT5nGMBUUkpPAytqdt7Z4X10e0wJqGOtuTNZRTLowJefFeUSuBzW9As0-Workw
+
+Archive-Asset-Name: air/src/blackberry-tablet.xml
+Archive-Asset-SHA-512-Digest: p66MRVUuYKUOD7t14QLwhM9BCUTx4iLN2YzbARb9nZh_Ycg0v36jF2QvJEHsq9SITRw9bEWSt_gwA6ANGEVdew
+
+Archive-Asset-Name: air/src/PlaybookSandbox.swf
+Archive-Asset-SHA-512-Digest: ZKiIV6X-TZic-d3yzQsh7KTQwhwuaY36slf5ietH1nawWF8UMpn0Sm__0U-jCj0AW68o0W3gVeShjPQf0FMM2A
+
+Archive-Asset-Name: air/src/winter-wonderland-1024x600.jpg
+Archive-Asset-SHA-512-Digest: _JCg5ibUsCGSZFpVjy2mFH5ZYz_WjfJccSKOleSOW_8tGtGqp0FE0Vvotb2pEis1XWhFvJcOMGi1k0liwhNt9g
+
