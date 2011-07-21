@@ -162,7 +162,7 @@
 			<arg value="/Applications/Adobe Flash Builder 4.5/sdks/DeveloperCertificate.p12"/>
 			<arg value="-storepass"/>
 			<arg value="${env.BLACKBERRY_SIGNING_PASSWORD}"/>
-			<arg value="${basedir}/${APP_NAME}.bar"/>
+			<arg value="${deploy.loc}/${APP_NAME}.bar"/>
 			<arg value="RDK"/>
 		</exec>
 
@@ -172,7 +172,7 @@
 			<arg value="/Applications/Adobe Flash Builder 4.5/sdks/DeveloperCertificate.p12"/>
 			<arg value="-storepass"/>
 			<arg value="${env.BLACKBERRY_SIGNING_PASSWORD}"/>
-			<arg value="${basedir}/${APP_NAME}.bar"/>
+			<arg value="${deploy.loc}/${APP_NAME}.bar"/>
 			<arg value="author"/>
 		</exec>
 		
