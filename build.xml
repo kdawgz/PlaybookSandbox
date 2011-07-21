@@ -10,20 +10,23 @@
 <project name="PlaybookSandbox" basedir="." default="package">
 	<!-- setup a prefix for all environment variables -->
 	<property environment="env" />
-	<!-- Version info -->
-	<property file="${basedir}/version.properties"/>
+	<!-- Properties info (Must Fill Out Correctly) -->
+	<property file="${basedir}/build.properties"/>
 	<!-- /Applications/Adobe Flash Builder 4.5/sdks/4.5.0 -->
 	<!-- Setup paths for build -->
-	<property name="FLEX_HOME" value="/Applications/Adobe Flash Builder 4.5/sdks/4.5.0" />
-	<property name="TABLET_SDK" value="/Library/RIM/blackberry-tablet-sdk-1.1.0/frameworks" />
-	<property name="APP_NAME" value="PlaybookSandbox" />
-	<!-- property name="ant.project.name" value="PlaybookSandbox" / -->
-
+	<property name="FLEX_HOME" value="${build.flexHome}" />
+	<property name="TABLET_SDK" value="${build.tabletSDK}" />
+	<property name="APP_NAME" value="${ant.project.name}" />
 	<property name="main.src.loc" location="${basedir}/src/" />
 	<property name="test.src.loc" location="${basedir}/tests/" />
 	<property name="lib.loc" location="${basedir}/libs" />
-	<property name="tabletsdk.loc" location="${TABLET_SDK}/libs" />
+	<!-- TabletSDK paths for build -->
+	<property name="tabletsdk.loc" location="${TABLET_SDK}" />
+	<property name="tabletsdklibs.loc" location="${TABLET_SDK}/frameworks/libs" />
+	<property name="tabletsdkbin.loc" location="${TABLET_SDK}/bin" />
+	<!-- AIRSDK paths for build -->
 	<property name="airsdk.loc" location="${FLEX_HOME}/frameworks/libs/air" />
+	<!-- Test and deploy output directories for build process -->
 	<property name="output.loc" location="${basedir}/target" />
 	<property name="testrunner.loc" location="${output.loc}/testrunner" />
 	<property name="report.loc" location="${output.loc}/report" />
@@ -71,18 +74,18 @@
 	</target>
 
 	<target name="compile" depends="init">
-		<!-- Compile Main.mxml as a SWF -->
+		<!-- Compile main application file as a SWF -->
 		<mxmlc file="${main.src.loc}/${APP_NAME}.as" output="${testrunner.loc}/${APP_NAME}.swf" static-link-runtime-shared-libraries="true">
 			<library-path dir="${lib.loc}" append="true">
 				<include name="*.swc" />
 			</library-path>
-			<library-path dir="${tabletsdk.loc}/qnx-screen" append="true">
+			<library-path dir="${tabletsdklibs.loc}/qnx-screen" append="true">
 				<include name="*.swc" />
 			</library-path>
-			<library-path dir="${tabletsdk.loc}/blackberry" append="true">
+			<library-path dir="${tabletsdklibs.loc}/blackberry" append="true">
 				<include name="*.swc" />
 			</library-path>
-			<library-path dir="${tabletsdk.loc}/air" append="true">
+			<library-path dir="${tabletsdklibs.loc}/air" append="true">
 				<include name="*.swc" />
 			</library-path>
 			<library-path dir="${airsdk.loc}" append="true">
@@ -107,13 +110,13 @@
 	         <include name="**/*Test.as" />
 	      </testSource>
 	      <library dir="${lib.loc}" />
-			<library dir="${tabletsdk.loc}/qnx-screen">
+			<library dir="${tabletsdklibs.loc}/qnx-screen">
 				<include name="*.swc" />
 			</library>
-			<library dir="${tabletsdk.loc}/blackberry">
+			<library dir="${tabletsdklibs.loc}/blackberry">
 				<include name="*.swc" />
 			</library>
-			<library dir="${tabletsdk.loc}/air">
+			<library dir="${tabletsdklibs.loc}/air">
 				<include name="*.swc" />				
 			</library>
 			<library dir="${airsdk.loc}">
@@ -132,18 +135,16 @@
 	</target>
 	
 	<target name="package" depends="test">
-		<!-- Assemble final bar file -->
+		<!-- Assemble for bar file, files must be packaged from root -->
 		<echo message="coping files to:${basedir} from:${main.src.loc}"/>
 		<copy file="${testrunner.loc}/${APP_NAME}.swf" todir="${basedir}" />
-		<delete dir="${testrunner.loc}" />
 		<copy file="${main.src.loc}/${APP_NAME}-app.xml" todir="${basedir}" />
 		<copy file="${main.src.loc}/blackberry-tablet.xml" todir="${basedir}" />
 		<copy file="${main.src.loc}/blackberry-tablet-icon.png" todir="${basedir}" />
 		<copy file="${main.src.loc}/winter-wonderland-1024x600.jpg" todir="${basedir}" />
-
-		<echo message="deploy.loc is:${deploy.loc} and basedir is:${basedir} and main.src.loc is:${main.src.loc}"/>
-		<!-- create bar file and sign-->
-		<exec executable="/Applications/Adobe Flash Builder 4.5/sdks/blackberry-tablet-sdk-1.1.0/bin/blackberry-airpackager">
+		
+		<!-- Create bar file in ${deploy.loc} -->
+		<exec executable="${tabletsdkbin.loc}/blackberry-airpackager">
 		    <arg value="-package"/>
 		    <arg value="${deploy.loc}/${APP_NAME}.bar"/>
 		    <arg value="${basedir}/${APP_NAME}-app.xml"/>
@@ -152,50 +153,56 @@
 			<arg value="${basedir}/blackberry-tablet-icon.png"/>
 			<arg value="${basedir}/winter-wonderland-1024x600.jpg"/>
 		</exec>
-		<echo message="deploy.loc is:${deploy.loc} and basedir is:${basedir} and main.src.loc is:${main.src.loc}"/>
-
-		<exec executable="/Applications/Adobe Flash Builder 4.5/sdks/blackberry-tablet-sdk-1.1.0/bin/blackberry-signer">
+		
+		<!-- Sign bar file with server -->
+		<exec executable="${tabletsdkbin.loc}/blackberry-signer">
 			<arg value="-verbose"/>
 			<arg value="-cskpass"/>
 			<arg value="${env.BLACKBERRY_SIGNING_PASSWORD}"/>
 			<arg value="-keystore"/>
-			<arg value="/Applications/Adobe Flash Builder 4.5/sdks/DeveloperCertificate.p12"/>
+			<arg value="${build.developerCert}/DeveloperCertificate.p12"/>
 			<arg value="-storepass"/>
 			<arg value="${env.BLACKBERRY_SIGNING_PASSWORD}"/>
 			<arg value="${deploy.loc}/${APP_NAME}.bar"/>
 			<arg value="RDK"/>
 		</exec>
 
-		<exec executable="/Applications/Adobe Flash Builder 4.5/sdks/blackberry-tablet-sdk-1.1.0/bin/blackberry-signer">
+		<!-- Sign bar file with developer certificate -->
+		<exec executable="${tabletsdkbin.loc}/blackberry-signer">
 			<arg value="-verbose"/>
 			<arg value="-keystore"/>
-			<arg value="/Applications/Adobe Flash Builder 4.5/sdks/DeveloperCertificate.p12"/>
+			<arg value="${build.developerCert}/DeveloperCertificate.p12"/>
 			<arg value="-storepass"/>
 			<arg value="${env.BLACKBERRY_SIGNING_PASSWORD}"/>
 			<arg value="${deploy.loc}/${APP_NAME}.bar"/>
 			<arg value="author"/>
 		</exec>
 		
+		<!-- Remove unneccessary directories-->
 		<delete file="${basedir}/${APP_NAME}.swf" />
 		<delete file="${basedir}/${APP_NAME}-app.xml" />
 		<delete file="${basedir}/blackberry-tablet.xml" />
 		<delete file="${basedir}/blackberry-tablet-icon.png" />
 		<delete file="${basedir}/winter-wonderland-1024x600.jpg" />
+		<delete dir="${testrunner.loc}" />
 	</target>
 	
 	<target name="deploy">
+		<!-- Create time-stampped directory on server-->
 		<set.timestamp/>
 		<sshexec host="assets.xtremelabs.com" 
 			username="xtreme" 
 			passphrase="${env.ANT_SCP_PASSWORD}" 
 			trust="true" 
-		    keyfile="/Users/KennethYip/.ssh/id_rsa" 
+		    keyfile="${build.keyfile}" 
 			failonerror="false" 
 		    command="mkdir -p /home/xtreme/mobile_assets/${APP_NAME}/${current.time}"/>
-		<scp file="${deploy.loc}/${ant.project.name}.bar" 
+		<!-- Copy bar file onto server-->
+		<scp file="${deploy.loc}/${APP_NAME}.bar" 
 			todir="xtreme:${env.ANT_SCP_PASSWORD}@assets.xtremelabs.com:/home/xtreme/mobile_assets/${APP_NAME}/${current.time}/" 
 			verbose="true" 
 			trust="yes"/>
+		<!-- Set proper permissions for directory and file on server-->
 		<sshexec host="assets.xtremelabs.com" 
 			username="xtreme" 
 			passphrase="${env.ANT_SCP_PASSWORD}" 
@@ -203,6 +210,7 @@
 			keyfile="/Users/KennethYip/.ssh/id_rsa" 
 			failonerror="false" 
 			command="cd /home/xtreme/mobile_assets/${APP_NAME}/; chmod -R 775 ${current.time}/${APP_NAME}.bar"/>
+		<!-- Output download link to file-->
 		<echo message="http://assets.xtremelabs.com/${APP_NAME}/${current.time}/${APP_NAME}.bar"/>
 	</target>
 </project>
