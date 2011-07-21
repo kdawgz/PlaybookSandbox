@@ -10,16 +10,18 @@
 <project name="PlaybookSandbox" basedir="." default="test">
 	<!-- setup a prefix for all environment variables -->
 	<property environment="env" />
-	<!-- Properties info (Must Fill Out Correctly) -->
+	<!-- Build Properties file needs to be filled out correctly -->
 	<property file="${basedir}/build.properties"/>
-	<!-- /Applications/Adobe Flash Builder 4.5/sdks/4.5.0 -->
+
+	<!-- Setup Flex and FlexUnit ant tasks -->
+	<!-- You can set this directly so mxmlc will work correctly, or set FLEX_HOME as an environment variable and use as below -->
+	<!-- property name="FLEX_HOME" value="${env.FLEX_HOME}" / -->
+	<property name="FLEX_HOME" value="${build.airSDK}" />
 	<!-- Setup paths for build -->
-	<property name="AIR_SDK" value="${build.airSDK}" />
 	<property name="TABLET_SDK" value="${build.tabletSDK}" />
 	<property name="APP_NAME" value="${ant.project.name}" />
 	<property name="ICON_NAME" value="${build.iconFile}" />
 	<property name="SPLASHSCREEN_NAME" value="${build.splashSceenFile}" />
-
 	<property name="main.src.loc" location="${basedir}/src/" />
 	<property name="test.src.loc" location="${basedir}/tests/" />
 	<property name="lib.loc" location="${basedir}/libs" />
@@ -28,18 +30,14 @@
 	<property name="tabletsdklibs.loc" location="${TABLET_SDK}/frameworks/libs" />
 	<property name="tabletsdkbin.loc" location="${TABLET_SDK}/bin" />
 	<!-- AIRSDK paths for build -->
-	<property name="airsdk.loc" location="${AIR_SDK}/frameworks/libs/air" />
+	<property name="airsdk.loc" location="${FLEX_HOME}/frameworks/libs/air" />
 	<!-- Test and deploy output directories for build process -->
 	<property name="output.loc" location="${basedir}/target" />
 	<property name="testrunner.loc" location="${output.loc}/testrunner" />
 	<property name="report.loc" location="${output.loc}/report" />
 	<property name="deploy.loc" location="${output.loc}/deploy" />
 
-	<!-- Setup Flex and FlexUnit ant tasks -->
-	<!-- You can set this directly so mxmlc will work correctly, or set AIR_SDK as an environment variable and use as below -->
-	<!-- property name="AIR_SDK" location="${env.AIR_SDK}" /-->
-	
-	<taskdef resource="flexTasks.tasks" classpath="${AIR_SDK}/ant/lib/flexTasks.jar" />
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
 	<taskdef resource="flexUnitTasks.tasks">
 	   <classpath>
 	      <fileset dir="${lib.loc}">
@@ -48,13 +46,14 @@
 	   </classpath>
 	</taskdef>
 	
-	<!-- Add JSCH jar to the classpath-->
+	<!-- Add JSCH jar to the classpath for scp/sshexec -->
 	<classloader>
 	   <classpath>
 	      <fileset dir="${lib.loc}" includes="jsch*.jar"/>
 	   </classpath>
 	</classloader>
 	
+	<!-- Set the timestamp -->
 	<macrodef name="set.timestamp">
 		<sequential>
 	    	<tstamp>
