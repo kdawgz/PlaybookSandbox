@@ -145,6 +145,6 @@
 	<target name="deploy">
 		<set.timestamp/>
 		<echo message="http://assets.xtremelabs.com/${APP_NAME}/${current.time}/${APP_NAME}.bar"/>
-		<scp file="${deploy.loc}/${ant.project.name}.bar" todir="xtreme:${env.ANT_SCP_PASSWORD}@assets.xtremelabs.com:/home/xtreme/mobile_assets/playbook_framework/${current.time}/" verbose="true" trust="yes" />
+		<scp file="${deploy.loc}/${ant.project.name}.bar" todir="xtreme:${env.ANT_SCP_PASSWORD}@assets.xtremelabs.com:/home/xtreme/mobile_assets/playbook_framework/${current.time}" verbose="true" trust="yes" />
 	</target>
 </project>
