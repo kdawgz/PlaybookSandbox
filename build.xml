@@ -146,7 +146,7 @@
 		<copy file="${main.src.loc}/${SPLASHSCREEN_NAME}" todir="${basedir}" />
 		
 		<!-- Create bar file in ${deploy.loc} -->
-		<exec executable="${tabletsdkbin.loc}/blackberry-airpackager">
+		<exec executable="${tabletsdkbin.loc}/blackberry-airpackager" failonerror="true">
 		    <arg value="-package"/>
 		    <arg value="${deploy.loc}/${APP_NAME}.bar"/>
 		    <arg value="${basedir}/${APP_NAME}-app.xml"/>
@@ -157,7 +157,7 @@
 		</exec>
 		
 		<!-- Sign bar file with server -->
-		<exec executable="${tabletsdkbin.loc}/blackberry-signer">
+		<exec executable="${tabletsdkbin.loc}/blackberry-signer" failonerror="true">
 			<arg value="-verbose"/>
 			<arg value="-cskpass"/>
 			<arg value="${env.BLACKBERRY_SIGNING_PASSWORD}"/>
@@ -170,7 +170,7 @@
 		</exec>
 
 		<!-- Sign bar file with developer certificate -->
-		<exec executable="${tabletsdkbin.loc}/blackberry-signer">
+		<exec executable="${tabletsdkbin.loc}/blackberry-signer" failonerror="true">
 			<arg value="-verbose"/>
 			<arg value="-keystore"/>
 			<arg value="${build.developerCert}/DeveloperCertificate.p12"/>
