@@ -52,7 +52,7 @@ package com.PlaybookSandbox.app.util
 			Assert.assertTrue(true);
 		}
 		
-		[Test]
+		[Test(expects="Error")]
 		public function testSampleError() : void {
 			throw new Error("ERROR! - This is an error");
 		}
