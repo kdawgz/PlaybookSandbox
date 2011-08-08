@@ -77,7 +77,7 @@
 
 	<target name="compile" depends="init">
 		<!-- Compile main application file as a SWF -->
-		<mxmlc file="${main.src.loc}/${APP_NAME}.as" output="${testrunner.loc}/${APP_NAME}.swf" configname="airmobile">
+		<mxmlc file="${main.src.loc}/${build.applicationFile}" output="${testrunner.loc}/${APP_NAME}.swf" configname="airmobile">
 			<library-path dir="${lib.loc}" append="true">
 				<include name="*.swc" />
 			</library-path>
