@@ -48,8 +48,8 @@ package com.PlaybookSandbox.app.util
 		
 		[Test]
 		public function testSampleFailure() : void {
-			Assert.fail("FAIL! - This is a sample test that will fail.");
-//			Assert.assertTrue(true);
+//			Assert.fail("FAIL! - This is a sample test that will fail.");
+			Assert.assertTrue(true);
 		}
 		
 		[Test(expects="Error")]
