@@ -5,7 +5,7 @@
    <icon>
    	<image>blackberry-tablet-icon.png</image>
    </icon>
-   <splashscreen>winter-wonderland-1024x600.jpg</splashscreen>
+   <splashscreen>PlayBookSplashScreen.jpg</splashscreen>
    <publisher>Xtreme Labs Inc.</publisher>
    <category>core.media</category>
    <!--  Name of author which is used for signing. 
