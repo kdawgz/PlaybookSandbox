@@ -71,7 +71,7 @@ package com.PlaybookSandbox.app.util
 		
 		[Test]  
 		public function testFailingAdditionOfTwoNumbers():void {   
-			Assert.assertEquals(Utils.failingToAddTwoNumbers((10,20),30);
+			Assert.assertEquals(Utils.failingToAddTwoNumbers(10,20),30);
 		}
 	}
 }
