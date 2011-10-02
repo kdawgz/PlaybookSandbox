@@ -1,6 +1,7 @@
 package com.PlaybookSandbox.app.util
 {
 	
+	import flashx.textLayout.debug.assert;
 	import flashx.textLayout.tlf_internal;
 	
 	import org.flexunit.Assert;
@@ -61,6 +62,11 @@ package com.PlaybookSandbox.app.util
 		[Test]
 		public function testSampleIgnore() : void {
 			
+		}
+
+		[Test]  
+		public function testAdditionOfTwoNumbers():void {   
+			Assert.assertEquals(Utils.addTwoNumbers(10,20),35);
 		}
 	}
 }

@@ -1,0 +1,10 @@
+<project>
+  <swfContents>
+    <linkReport>/Users/KennethYip/Documents/Adobe Flash Builder 4.5/PlaybookSandbox/Dependency Analysis</linkReport>
+  </swfContents>
+  <sourcePath>
+    <directory>/Users/KennethYip/Documents/Adobe Flash Builder 4.5/PlaybookSandbox/src</directory>
+    <directory>/Users/KennethYip/Documents/Adobe Flash Builder 4.5/PlaybookSandbox/src</directory>
+  </sourcePath>
+  <mainClass>PlaybookSandbox</mainClass>
+</project>
