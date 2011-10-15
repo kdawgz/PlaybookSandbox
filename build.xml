@@ -37,7 +37,7 @@
 	<property name="report.loc" location="${output.loc}/report" />
 	<property name="deploy.loc" location="${output.loc}/deploy" />
 
-	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+	<taskdef resource="flexTasks.tasks" classpath="${lib.loc}/flexTasks.jar" />
 
 	<taskdef resource="flexUnitTasks.tasks">
 	   <classpath>
@@ -78,7 +78,7 @@
 
 	<target name="compile" depends="init">
 		<!-- Compile main application file as a SWF -->
-		<mxmlc file="${main.src.loc}/${build.applicationFile}" output="${testrunner.loc}/${APP_NAME}.swf" configname="airmobile">
+		<mxmlc file="${main.src.loc}/${build.applicationFile}" output="${testrunner.loc}/${APP_NAME}.swf" configname="airmobile" keep-generated-actionscript="true" actionscript-file-encoding="UTF-8" debug="true" incremental="false" link-report="Dependency Analysis">
 			<library-path dir="${lib.loc}" append="true">
 				<include name="*.swc" />
 			</library-path>
