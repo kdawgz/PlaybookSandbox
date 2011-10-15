@@ -38,6 +38,7 @@
 	<property name="deploy.loc" location="${output.loc}/deploy" />
 
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+
 	<taskdef resource="flexUnitTasks.tasks">
 	   <classpath>
 	      <fileset dir="${lib.loc}">
@@ -100,8 +101,9 @@
 
 	<target name="test" depends="compile">
 		<!-- Execute FlexUnit tests and publish reports -->
-		<flexunit 
+		<flexunit
 		    workingDir="${testrunner.loc}"
+			debug="true"
 		    toDir="${report.loc}" 
 			haltonfailure="false" 
 			verbose="true" 
@@ -192,7 +194,7 @@
 	<target name="deploy" depends="package">
 		<!-- Create time-stampped directory on server-->
 		<set.timestamp/>
-		<sshexec host="assets.xtremelabs.com" 
+		<sshexec host="72.249.182.234" 
 			username="xtreme" 
 			passphrase="${env.ANT_SCP_PASSWORD}" 
 			trust="true" 
@@ -201,11 +203,11 @@
 		    command="mkdir -p /home/xtreme/mobile_assets/${APP_NAME}/${current.time}"/>
 		<!-- Copy bar file onto server-->
 		<scp file="${deploy.loc}/${APP_NAME}.bar" 
-			todir="xtreme:${env.ANT_SCP_PASSWORD}@assets.xtremelabs.com:/home/xtreme/mobile_assets/${APP_NAME}/${current.time}/" 
+			todir="xtreme:${env.ANT_SCP_PASSWORD}@72.249.182.234:/home/xtreme/mobile_assets/${APP_NAME}/${current.time}/" 
 			verbose="true" 
 			trust="yes"/>
 		<!-- Set proper permissions for directory and file on server-->
-		<sshexec host="assets.xtremelabs.com" 
+		<sshexec host="72.249.182.234" 
 			username="xtreme" 
 			passphrase="${env.ANT_SCP_PASSWORD}" 
 			trust="true" 
@@ -213,6 +215,6 @@
 			failonerror="false" 
 			command="cd /home/xtreme/mobile_assets/${APP_NAME}/; chmod -R 775 ${current.time}/${APP_NAME}.bar"/>
 		<!-- Output download link to file-->
-		<echo message="http://assets.xtremelabs.com/${APP_NAME}/${current.time}/${APP_NAME}.bar"/>
+		<echo message="http://72.249.182.234/${APP_NAME}/${current.time}/${APP_NAME}.bar"/>
 	</target>
 </project>
